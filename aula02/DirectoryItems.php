@@ -6,9 +6,9 @@
 class DirectoryItems {
 
 
-    var $fileArray = array();
+    private $fileArray = array();
 
-    function DirectoryItems($directory) { $d = "";
+    function __construct($directory) { $d = "";
         if(is_dir($directory)){
             $d = opendir($directory) or
                 die ("Não pude abrir o diretório.");
@@ -26,6 +26,11 @@ class DirectoryItems {
             //error
             die("Deve-se informar um diretório");
             }
+        }
+
+        public function getFileArray()
+        {
+            return $this->fileArray;
         }
 
         function indexOrder(){

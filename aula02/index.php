@@ -7,13 +7,15 @@
 
 <?php
 require 'DirectoryItems.php';
-$di = & new DirectoryItems('fotos');
+$di = new DirectoryItems('fotos');
 $di->checkAllImages() or die("Not all file are images.");
 $di->naturalCaseInsensitiveOrder();
 
+
+
 //mostra o fileArray
 echo "<div style = 'text-align:center;'>";
-foreach($di->fileArray as $key => $value){
+foreach($di->getFileArray() as $key => $value){
     echo "<img src='fotos/$value' /><br>";
 }
 

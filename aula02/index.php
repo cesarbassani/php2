@@ -8,6 +8,17 @@
 <?php
 require 'DirectoryItems.php';
 $di = new DirectoryItems('fotos');
+
+echo "<pre>";
+print_r($di->getFileArray());
+
+$di->filter();
+
+print_r($di->getFileArray());
+die();
+
+
+
 $di->checkAllImages() or die("Not all file are images.");
 $di->naturalCaseInsensitiveOrder();
 

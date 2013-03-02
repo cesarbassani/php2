@@ -8,24 +8,45 @@ class DirectoryItems {
 
     private $fileArray = array();
 
-    function __construct($directory) { $d = "";
-        if(is_dir($directory)){
-            $d = opendir($directory) or
-                die ("Não pude abrir o diretório.");
 
-            while( false !== ( $f = readdir($d)) ){
-                if( is_file("$directory/$f") ) {
-                    $this->fileArray[] = $f;
+    public function __construct($directory, $replacechar = "_")
+            {
+                $this->directory = $directory;
+                $this->replaceChar = $replacechar;
 
+                $d = "";
+                if( is_dir($directory) )
+                {
+                    $d = opendir($directory) or
+                        die ("Não pude abrir o diretorio.");
+
+                while( false !== ($f = readdir($d)) )
+                {
+                    if(is_file("$directory/$f"))
+                    {
+                        $title=$this->createTitle($f);
+                        $this->fileArray[$f] = $title;
+                    }
+                }
+                closedir($d);
+                }
+                else
+                {
+                    //error
+                    die("Deve-se informar um diretorio");
                 }
             }
-            closedir($d);
-        }
-        else
+
+            private function createTitle($file)
             {
-            //error
-            die("Deve-se informar um diretório");
-            }
+                //retira a extensão
+                $title = substr($file, 0, strrpos($file, '.'));
+
+                //substitui o separador
+                $title = str_replace($this->replaceChar, ' ',$title);
+
+                return $title;
+
         }
 
         public function getFileArray()
@@ -45,22 +66,19 @@ class DirectoryItems {
             return count($this->fileArray);
         }
 
-        function checkAllImages(){
-            $bln = true;
-            $extension = "";
+        public function filter() {
+
             $types = array('jpg','jpeg','gif','png');
-            foreach($this->fileArray as $key => $value){
-                $extension = substr( $value,( strrpos($value, '.') + 1 ) );
+
+            foreach($this->fileArray as $key => $value)
+            {
+                $extension = substr( $key,( strrpos($key, '.') + 1 ) );
                 $extension = strtolower($extension);
                 if(!in_array($extension, $types) ){
-                    $bln = false;
-                    break;
+                    unset($this->fileArray[$key]);
                 }
             }
-            return $bln;
-
-
-                }
+       }
 
         
 }

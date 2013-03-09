@@ -18,7 +18,8 @@ foreach($fileArray as $key => $value) {
      * erros no script getthumb ou na classe resultara em links
      * quebrados. Os erros serao ocultados.
      */
-    echo "<img src='getthumb.php?path=$path&size=$size' style='border:1px solid black; margin-top:20px;' alt='$value' /><br />";
+    echo "<img src='getthumb.php?path=$path&size=$size' style='border:1px solid black; margin-top:20px;' alt='$value' />
+    <br />";
 
     echo "<a href='$path' target='_blank' >";
     echo "Title: $value </a> <br>";

@@ -14,7 +14,7 @@ else
     $maxsize = 100;
 }
 
-if( isset($path)) {
+if(isset($path)) {
     $thumb = new ThumbnailImage($path, $maxsize);
     $thumb->getImage();
 }

@@ -7,7 +7,7 @@ $dc->filter();
 $path = "";
 $fileArray = $dc->getFileArray();
 
-echo '<div style="text-align: center;"';
+echo '<div style="text-align: center;">';
 echo "Clique no nome do arquivo para exibir a imagem no tamanho original.<br />";
 
 // especifica o tamanho dos thumbnails

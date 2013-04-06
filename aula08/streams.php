@@ -1,17 +1,13 @@
 <?php
 
-$fp = fopen("/etc/services", "r");
+$fp = fopen("/tmp/saida.txt", "a");
 
 if (!$fp) {
     die("Falha ao abrir arquivo");
 }
 
-echo "<pre>";
-while ($line = fgets($fp))
-    {
-
-    echo $line;
-
-}
+fwrite($fp, "Teste 123\n");
+fwrite($fp, "segunda linha" . PHP_EOL);
+fwrite($fp, "terceira linha" . "\n");
 
 fclose($fp);
